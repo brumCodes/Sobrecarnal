@@ -31,7 +31,7 @@
             const colecao = JSON.parse(localStorage.getItem('imagensDesbloqueadas')) || [];
 
             if (colecao.length === 0) {
-                grid.innerHTML = "<p style='opacity:0.5; font-family: sans-serif;'>Nenhum fragmento coletado ainda. Volte e clique no olho.</p>";
+                grid.innerHTML = "<p style='opacity:0.5; font-family: sans-serif; grid-column: 1 / -1; text-align: center; width: 100%;'>Nenhum fragmento coletado ainda. Volte e clique no olho.</p>";
             } else {
                 colecao.forEach(caminho => {
                     const img = document.createElement('img');

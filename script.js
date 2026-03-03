@@ -31,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
         btnColecao.addEventListener('click', () => {
             if (galeriaContainer) {
                 galeriaContainer.style.display = 'block';
+                const iframe = galeriaContainer.querySelector('iframe');
+                if (iframe) {
+                    iframe.src = iframe.src; // Força a galeria a recarregar e ler os novos itens
+                }
             }
         });
     }
