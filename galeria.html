@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coleção - Sobrecarnal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="pagina-galeria">
+
+    <a href="#" id="btn-voltar" style="color: #900; text-decoration: none; font-family: 'Cinzel', serif;">← Voltar ao Sacrifício</a>
+    
+    <h1 style="margin-top: 20px;">Arquivos de Sobrecarnal</h1>
+    <hr style="border: 0; border-top: 1px solid #222; margin: 20px 0;">
+    
+    <div id="grid-colecao" class="grid-colecao">
+        </div>
+
+    <div id="visualizador">
+        <img id="imagem-grande" src="" alt="Ampliado">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('grid-colecao');
+            const visualizador = document.getElementById('visualizador');
+            const imagemGrande = document.getElementById('imagem-grande');
+            const btnVoltar = document.getElementById('btn-voltar');
+            
+            const colecao = JSON.parse(localStorage.getItem('imagensDesbloqueadas')) || [];
+
+            if (colecao.length === 0) {
+                grid.innerHTML = "<p style='opacity:0.5; font-family: sans-serif;'>Nenhum fragmento coletado ainda. Volte e clique no olho.</p>";
+            } else {
+                colecao.forEach(caminho => {
+                    const img = document.createElement('img');
+                    img.src = caminho;
+                    img.className = 'item-galeria';
+                    
+                    img.addEventListener('click', () => {
+                        imagemGrande.src = caminho;
+                        visualizador.style.display = 'flex';
+                    });
+
+                    grid.appendChild(img);
+                });
+            }
+
+            visualizador.addEventListener('click', () => {
+                visualizador.style.display = 'none';
+            });
+
+            btnVoltar.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (window.self !== window.top) {
+                    window.parent.postMessage('fecharGaleria', '*');
+                } else {
+                    window.location.href = 'game.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

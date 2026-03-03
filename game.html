@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobrecarnal - O Jogo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="pagina-game">
+
+    <div id="contador-visual">0 / 10</div>
+
+    <div id="game-container">
+        <video autoplay muted loop playsinline id="video-bg">
+            <source src="assets/background-video.mp4" type="video/mp4">
+        </video>
+
+        <div class="pendulo-container">
+            <img src="assets/olho.png" id="olho" alt="Olho">
+        </div>
+
+        <main>
+            <h1 class="titulo">Sobrecarnal</h1>
+        </main>
+
+        <div id="btn-colecao" class="btn-circular" style="cursor: pointer;">
+            <span>Coleção</span>
+        </div>
+
+        <img src="assets/mosca.png" id="mosca" style="display: none; position: absolute; width: 80px; z-index: 100; cursor: pointer; transition: width 0.3s ease;">
+        <img src="assets/mao-aberta.png" id="mao" style="display: none; position: absolute; z-index: 90; cursor: pointer; transform: translate(-50%, -150%);">
+        
+        <!-- CAIXA DE DIÁLOGO FINAL -->
+        <div id="dialogo-container">
+            <p id="texto-dialogo"></p>
+            <span id="seta-proximo">▼</span>
+        </div>
+    </div>
+
+    <div id="janela-recompensa" class="modal-recompensa">
+        <div class="modal-conteudo">
+            <span class="fechar-modal">&times;</span>
+            <h2 style="font-family: 'Cinzel'; color: #900;">Fragmento Desbloqueado</h2>
+            <img src="assets/diario-fernando.png" class="imagem-recompensa">
+            <p style="color: #666; font-size: 0.8rem; margin-top: 10px;">O diário do Padre Fernando foi guardado na sua Coleção.</p>
+        </div>
+    </div>
+
+    <!-- CONTAINER DA GALERIA (IFRAME) -->
+    <div id="container-iframe-galeria" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 2500;">
+        <iframe src="galeria.html" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

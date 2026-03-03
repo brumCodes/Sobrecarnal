@@ -1,0 +1,473 @@
+/* RESET GERAL */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body, html { 
+    width: 100%; height: 100%; 
+    background: #000 !important; 
+}
+
+/* --- ESTRUTURA GERAL --- */
+body#pagina-home, body#pagina-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* --- CONTAINER DO JOGO --- */
+#game-container {
+    position: relative;
+    width: 100%;
+    max-width: 1024px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(50, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+
+/* --- TELA CHEIA --- */
+#game-container:fullscreen {
+    max-width: none;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+}
+
+/* --- ELEMENTOS VISUAIS --- */
+#video-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 0;
+}
+
+.pendulo-container {
+    position: absolute;
+    top: -20px; left: 50%; transform: translateX(-50%);
+    z-index: 5; text-align: center;
+}
+
+#olho {
+    width: 160px; cursor: pointer;
+    transform-origin: top center;
+    animation: balancoLeve 4s ease-in-out infinite;
+}
+
+/* --- AJUSTES PÁGINA INICIAL --- */
+#pagina-home #olho {
+    width: 176px;
+}
+
+/* --- TIPOGRAFIA --- */
+main {
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    text-align: center; width: 100%; color: white; z-index: 10;
+    pointer-events: none;
+}
+
+.titulo { font-family: 'Cinzel', serif; font-size: 3.5rem; letter-spacing: 5px; pointer-events: auto; }
+
+/* --- AJUSTES TÍTULO HOME --- */
+#pagina-home .titulo {
+    font-size: 3.85rem;
+}
+
+/* --- BOTÕES --- */
+.badge {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 160px; height: 50px;
+    border: 1px solid white;
+    padding: 0;
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.4); 
+    pointer-events: auto;
+    color: white;
+    font-family: 'Cinzel', serif;
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.badge p {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.badge .data {
+    opacity: 0.7;
+}
+
+.badge.bloqueado {
+    opacity: 0.6;
+}
+
+/* --- MENU INICIAL --- */
+.menu-inicial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.btn-experiencia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px; height: 50px;
+    padding: 0;
+    border: 1px solid white;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-family: 'Cinzel', serif;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    font-size: 0.9rem;
+}
+
+.btn-experiencia:hover {
+    background: #900;
+    border-color: #900;
+    transform: scale(1.05);
+}
+
+/* --- MODAL RECOMPENSA --- */
+.modal-recompensa {
+    display: none; position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 2000;
+    justify-content: center; align-items: center;
+}
+
+.modal-conteudo {
+    background: #111; padding: 20px; border: 1px solid #600;
+    text-align: center; max-width: 320px; 
+    width: 90%; position: relative;
+}
+
+.imagem-recompensa { 
+    width: 100%; 
+    max-height: 70vh; 
+    object-fit: contain; 
+    margin: 10px 0; 
+    border: 1px solid #333; 
+}
+
+.fechar-modal {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    color: #900;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* --- GALERIA --- */
+#pagina-galeria { 
+    background: #050505 !important; 
+    padding: 40px; 
+    color: white; 
+    font-family: 'Cinzel', serif; 
+    min-height: 100vh;
+}
+
+.grid-colecao { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+    gap: 20px; 
+    margin-top: 30px; 
+}
+
+.item-galeria { 
+    width: 100%; 
+    height: 180px; 
+    border: 2px solid #200; 
+    cursor: pointer; 
+    background: #111; 
+    object-fit: contain; 
+    padding: 5px; 
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.item-galeria:hover {
+    transform: scale(1.05);
+    border-color: #900;
+}
+
+/* --- VISUALIZADOR --- */
+#visualizador {
+    display: none; position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95); z-index: 3000;
+    justify-content: center; align-items: center;
+}
+
+#imagem-grande { max-width: 90%; max-height: 90%; border: 1px solid #444; }
+
+/* --- BOTÃO COLEÇÃO --- */
+.btn-circular {
+    position: absolute; bottom: 30px; right: 30px;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: rgba(60, 0, 0, 0.8); color: white;
+    border: 1px solid white; display: flex; justify-content: center;
+    align-items: center; text-decoration: none; z-index: 100;
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes balancoLeve { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+.olho-agitado { animation: balancoForte 0.5s ease-in-out 3 !important; }
+@keyframes balancoForte { 0%, 100% { transform: rotate(-25deg); } 50% { transform: rotate(25deg); } }
+
+#contador-visual {
+    position: static;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 30px;
+    color: white;
+    font-family: 'Cinzel', serif;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* --- MOSCA --- */
+#mosca {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    z-index: 100;
+    cursor: pointer;
+    transition: width 0.2s ease-out;
+    animation: vooInfinito 6s linear infinite;
+    pointer-events: auto;
+}
+
+@keyframes vooInfinito {
+    0%   { transform: translate(-25vw, -10vh) scaleX(1); }
+    25%  { transform: translate(10vw, -25vh) scaleX(1); }
+    49.9% { transform: translate(25vw, 0) scaleX(1); }
+    50%   { transform: translate(25vw, 0) scaleX(-1); } 
+    75%   { transform: translate(-10vw, 20vh) scaleX(-1); }
+    99.9% { transform: translate(-25vw, -10vh) scaleX(-1); }
+    100%  { transform: translate(-25vw, -10vh) scaleX(1); }
+}
+
+/* --- MÃO --- */
+#mao {
+    position: absolute;
+    top: 0;
+    left: 70%; 
+    transform: translate(-50%, -100%); 
+    width: 190px; 
+    z-index: 101;
+    cursor: pointer;
+    display: none;
+    transition: width 0.2s ease;
+}
+
+.mao-descendo {
+    animation: descerMao 1.5s ease-out forwards;
+}
+
+@keyframes descerMao {
+    0%   { transform: translate(-50%, -100%); }
+    100% { transform: translate(-50%, -10%); } 
+}
+
+.mao-vibrando {
+    animation: vibrar 0.1s linear infinite;
+}
+
+@keyframes vibrar {
+    0%   { transform: translate(-50%, -10%) rotate(0deg); }
+    25%  { transform: translate(-51%, -10%) rotate(1deg); }
+    75%  { transform: translate(-49%, -10%) rotate(-1deg); }
+    100% { transform: translate(-50%, -10%) rotate(0deg); }
+}
+
+/* --- MOSCA CAINDO --- */
+.mosca-caindo {
+    display: block !important;
+    animation: quedaMosca 1s ease-in forwards !important;
+}
+
+@keyframes quedaMosca {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, 500px) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+.mao-descansando {
+    transition: all 1s ease-in-out;
+}
+
+/* --- MINIONS --- */
+.minion {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    height: 125px;
+    width: auto;
+    cursor: pointer;
+    z-index: 95;
+    transition: left 0.3s ease-out;
+}
+
+#mao {
+    z-index: 101; 
+}
+
+.minion[src*="piscando"] {
+    filter: brightness(1.1);
+}
+.mao-esmagando {
+    animation: esmagarMinions 0.5s ease-in forwards !important;
+}
+
+@keyframes esmagarMinions {
+    100% { transform: translate(-50%, 80%) !important; } 
+}
+
+.mao-esmagando {
+    animation: esmagarMinions 0.4s cubic-bezier(0.6, 0, 0.4, 1) forwards !important;
+}
+
+@keyframes esmagarMinions {
+    100% { transform: translate(-50%, 75%) !important; } 
+}
+
+.mao-entregando-item {
+    animation: entregarItem 2s ease-in-out forwards;
+}
+
+@keyframes entregarItem {
+    0% { transform: translate(-50%, -10%); }
+    45% { transform: translate(-50%, -120%); }
+    55% { transform: translate(-50%, -120%); }
+    100% { transform: translate(-50%, -10%); }
+}
+.minion-grupo {
+    height: 155px !important;
+    width: auto !important;
+}
+.mosca-dupla {
+    position: absolute;
+    width: 100px;
+    z-index: 100;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.mosca1 {
+    animation: vooMosca1 6s linear infinite;
+}
+
+.mosca2 {
+    animation: vooMosca2 4.5s linear infinite;
+}
+
+@keyframes vooMosca1 {
+    0%   { transform: translate(-20vw, -10vh) scaleX(1); }
+    25%  { transform: translate(15vw, -25vh) scaleX(1); }
+    49.9% { transform: translate(25vw, 0vh) scaleX(1); }
+    50%  { transform: translate(25vw, 0vh) scaleX(-1); }
+    75%  { transform: translate(-10vw, 20vh) scaleX(-1); }
+    99.9% { transform: translate(-20vw, -10vh) scaleX(-1); }
+    100% { transform: translate(-20vw, -10vh) scaleX(1); }
+}
+
+@keyframes vooMosca2 {
+    0%   { transform: translate(20vw, 10vh) scaleX(-1); }
+    25%  { transform: translate(-15vw, 25vh) scaleX(-1); }
+    49.9% { transform: translate(-25vw, 0vh) scaleX(-1); }
+    50%  { transform: translate(-25vw, 0vh) scaleX(1); }
+    75%  { transform: translate(10vw, -20vh) scaleX(1); }
+    99.9% { transform: translate(20vw, 10vh) scaleX(1); }
+    100% { transform: translate(20vw, 10vh) scaleX(-1); }
+}
+
+/* --- DIÁLOGO FINAL --- */
+#dialogo-container {
+    display: none;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    min-height: 150px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #fff;
+    padding: 20px;
+    color: white;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    z-index: 6000;
+    cursor: pointer;
+    user-select: none;
+}
+
+#texto-dialogo {
+    white-space: pre-wrap;
+}
+
+#seta-proximo {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 1.5rem;
+    animation: piscarSeta 1s infinite;
+}
+
+@keyframes piscarSeta {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.tremor-tela {
+    animation: tremer 0.1s linear infinite;
+}
+
+@keyframes tremer {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-2px, 2px); }
+    50% { transform: translate(2px, -2px); }
+    75% { transform: translate(-2px, -2px); }
+    100% { transform: translate(0, 0); }
+}
+
+.pendulo-subindo {
+    top: -150% !important;
+    transition: top 5s ease-in-out;
+}
+
+/* --- ANIMAÇÃO FINAL --- */
+#animacao-final {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 200;
+    object-fit: cover;
+}
+
+.animacao-descendo {
+    animation: descerTela 2.5s ease-out forwards;
+}
+
+@keyframes descerTela {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(0); }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobrecarnal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="pagina-home">
+
+    <video autoplay muted loop playsinline id="video-bg">
+        <source src="assets/background-video.mp4" type="video/mp4">
+    </video>
+
+    <div class="pendulo-container">
+        <img src="assets/olho.png" id="olho" alt="Olho">
+    </div>
+
+    <main>
+        <h1 class="titulo">Sobrecarnal</h1>
+        
+        <div class="menu-inicial">
+            <button class="badge bloqueado" id="btn-piloto">
+                <p>piloto estreia</p>
+                <p class="data">??/??</p>
+            </button>
+            
+            <a href="game.html" class="btn-experiencia">Experiência</a>
+        </div>
+    </main>
+    
+    <div id="janela-piloto" class="modal-recompensa">
+        <div class="modal-conteudo">
+            <span class="fechar-modal" id="fechar-piloto">&times;</span>
+            <h2 style="font-family: 'Cinzel'; color: #900;">Em Breve</h2>
+            <p style="color: #ccc; font-size: 1rem; margin-top: 10px; font-family: 'Cinzel', serif;">Volte no dia ??/?? para ler gratuitamente.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnPiloto = document.getElementById('btn-piloto');
+            const janelaPiloto = document.getElementById('janela-piloto');
+            const fecharPiloto = document.getElementById('fechar-piloto');
+
+            btnPiloto.addEventListener('click', () => {
+                janelaPiloto.style.display = 'flex';
+            });
+            fecharPiloto.addEventListener('click', () => {
+                janelaPiloto.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
