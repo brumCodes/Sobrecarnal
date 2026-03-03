@@ -294,10 +294,6 @@ main {
     100%  { transform: translate(-25vw, -10vh) scaleX(1); }
 }
 
-#mosca.mosca-atingida {
-    transform: scale(0.8); /* Reduz visualmente ao clicar */
-}
-
 /* --- MÃO --- */
 #mao {
     position: absolute;
@@ -510,64 +506,28 @@ main {
     100% { transform: translateY(0); }
 }
 
-/* --- RESPONSIVIDADE (MOBILE) --- */
+/* --- BLOQUEIO MOBILE --- */
+#aviso-mobile {
+    display: none; /* Escondido por padrão no PC */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #050505;
+    z-index: 10000; /* Fica acima de tudo */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+#aviso-mobile h2 { font-family: 'Cinzel', serif; font-size: 2rem; color: #900; margin-bottom: 20px; }
+#aviso-mobile p { font-family: 'Cinzel', serif; font-size: 1.1rem; line-height: 1.6; color: #ccc; }
+
+/* Se a tela for menor que 768px (celulares e tablets pequenos) */
 @media (max-width: 768px) {
-    /* Ajustes Gerais de Layout */
-    body#pagina-home, body#pagina-game, html {
-        height: 100vh !important;
-        overflow: hidden !important;
-        justify-content: center !important;
-    }
-
-    /* Home */
-    #pagina-home .titulo { font-size: 2.5rem !important; margin-bottom: 15px !important; }
-    #pagina-home #olho { width: 130px !important; }
-    .menu-inicial { flex-direction: column !important; gap: 15px !important; margin-top: 20px !important; }
-    .badge, .btn-experiencia { width: 140px !important; height: 45px !important; font-size: 0.8rem !important; }
-    
-    /* Game Container */
-    #game-container {
-        width: 100vw !important;
-        aspect-ratio: 16 / 9 !important;
-        height: auto !important;
-        max-width: none !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-
-    /* Elementos do Jogo (Escala Reduzida Proporcionalmente) */
-    .titulo { 
-        font-size: 1.5rem !important; margin-top: 10px !important; 
-    }
-
-    #olho { width: 60px !important; }
-    
-    #mosca { width: 40px !important; }
-    .mosca-dupla { width: 40px !important; }
-    
-    #mao { width: 70px !important; }
-    
-    .minion { height: 50px !important; }
-    .minion-grupo { height: 60px !important; }
-    
-    .btn-circular { 
-        width: 40px !important; height: 40px !important; 
-        bottom: 10px !important; right: 10px !important; 
-        font-size: 0.6rem !important;
-    }
-
-    /* Ajuste Pêndulo */
-    .pendulo-container { top: -10px !important; }
-
-    /* Galeria */
-    #pagina-galeria { padding: 15px !important; }
-    .grid-colecao { 
-        grid-template-columns: repeat(3, 1fr) !important; 
-        gap: 10px !important; 
-    }
-    
-    /* Modais e Diálogos */
-    .modal-conteudo { width: 90% !important; padding: 15px !important; }
-    #dialogo-container { width: 95% !important; font-size: 0.9rem !important; padding: 10px !important; bottom: 10px !important; }
-    #btn-play-dialogo { width: 50px !important; height: 50px !important; font-size: 1.5rem !important; }
+    #aviso-mobile { display: flex; }
+    #game-container, #contador-visual { display: none !important; }
+    body { overflow: hidden; }
 }
