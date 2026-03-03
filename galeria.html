@@ -19,6 +19,11 @@
 
     <div id="visualizador">
         <img id="imagem-grande" src="" alt="Ampliado">
+        <button id="btn-play-dialogo">▶</button>
+        <div id="dialogo-container">
+            <p id="texto-dialogo"></p>
+            <span id="seta-proximo">▼</span>
+        </div>
     </div>
 
     <script>
@@ -27,6 +32,44 @@
             const visualizador = document.getElementById('visualizador');
             const imagemGrande = document.getElementById('imagem-grande');
             const btnVoltar = document.getElementById('btn-voltar');
+            const btnPlay = document.getElementById('btn-play-dialogo');
+            const dialogoBox = document.getElementById('dialogo-container');
+            const textoBox = document.getElementById('texto-dialogo');
+
+            const dialogosRecompensa10 = [
+                "???: *Choro apertado*",
+                "Polícia: Senhora? A senhora está bem? O que aconteceu?",
+                "???: Não… não era ela… não era uma mulher…",
+                "Polícia: Como não era? O que a senhora viu?",
+                "???: Ela… os olhos…  e as mãos… não era! Eu… eu me escondi... me escondi debaixo da mesa.",
+                "Polícia: Mantenha a calma, me diga devagar. Essa pessoa ainda está aí?",
+                "???: Ela... Ela fez na minha frente...",
+                "Polícia: Senhora, preciso que colabore conosco.",
+                "???: Ela… ela comeu ela… inteira…",
+                "Polícia: Comeu?",
+                "???: Comeu inteira e depois foi embora."
+            ];
+
+            let indiceDialogo = 0;
+            let typingInterval;
+            let isTyping = false;
+            let textoAtual = "";
+
+            function typeText(text) {
+                textoBox.innerText = "";
+                textoAtual = text;
+                isTyping = true;
+                let i = 0;
+                clearInterval(typingInterval);
+                typingInterval = setInterval(() => {
+                    textoBox.innerText += text.charAt(i);
+                    i++;
+                    if (i >= text.length) {
+                        clearInterval(typingInterval);
+                        isTyping = false;
+                    }
+                }, 30);
+            }
             
             function carregarGaleria() {
                 const colecao = JSON.parse(localStorage.getItem('imagensDesbloqueadas')) || [];
@@ -43,6 +86,20 @@
                         img.addEventListener('click', () => {
                             imagemGrande.src = caminho;
                             visualizador.style.display = 'flex';
+                            
+                            // Resetar estados
+                            dialogoBox.style.display = 'none';
+                            imagemGrande.classList.remove('zoomed'); // Reseta o zoom ao abrir
+                            clearInterval(typingInterval);
+
+                            // Verifica se é a recompensa 10 para mostrar o play
+                            if (caminho.includes('recompensa10.png')) {
+                                btnPlay.style.display = 'block';
+                                imagemGrande.classList.remove('zoomavel');
+                            } else {
+                                btnPlay.style.display = 'none';
+                                imagemGrande.classList.add('zoomavel');
+                            }
                         });
 
                         grid.appendChild(img);
@@ -57,8 +114,54 @@
                 if (event.data === 'atualizarGaleria') carregarGaleria();
             });
 
+            // Zoom na imagem
+            imagemGrande.addEventListener('click', (e) => {
+                if (imagemGrande.classList.contains('zoomavel')) {
+                    e.stopPropagation(); // Impede que feche o visualizador
+                    
+                    if (imagemGrande.classList.contains('zoomed')) {
+                        imagemGrande.classList.remove('zoomed');
+                    } else {
+                        const rect = imagemGrande.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        imagemGrande.style.transformOrigin = `${(x / rect.width) * 100}% ${(y / rect.height) * 100}%`;
+                        imagemGrande.classList.add('zoomed');
+                    }
+                }
+            });
+
+            // Botão Play
+            btnPlay.addEventListener('click', (e) => {
+                e.stopPropagation(); // Não fechar o visualizador
+                btnPlay.style.display = 'none';
+                dialogoBox.style.display = 'block';
+                indiceDialogo = 0;
+                typeText(dialogosRecompensa10[0]);
+            });
+
+            // Avançar Diálogo
+            dialogoBox.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (isTyping) {
+                    clearInterval(typingInterval);
+                    textoBox.innerText = textoAtual;
+                    isTyping = false;
+                } else {
+                    indiceDialogo++;
+                    if (indiceDialogo < dialogosRecompensa10.length) {
+                        typeText(dialogosRecompensa10[indiceDialogo]);
+                    } else {
+                        dialogoBox.style.display = 'none';
+                        btnPlay.style.display = 'block'; // Mostra o play de novo ao terminar
+                    }
+                }
+            });
+
             visualizador.addEventListener('click', () => {
                 visualizador.style.display = 'none';
+                dialogoBox.style.display = 'none';
+                clearInterval(typingInterval);
             });
 
             btnVoltar.addEventListener('click', (e) => {

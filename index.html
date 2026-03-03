@@ -38,11 +38,40 @@
         </div>
     </div>
 
+    <div id="btn-colecao" class="btn-circular" style="cursor: pointer;">
+        <span>Coleção</span>
+    </div>
+
+    <div id="container-iframe-galeria" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 2500;">
+        <iframe src="galeria.html" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const btnPiloto = document.getElementById('btn-piloto');
             const janelaPiloto = document.getElementById('janela-piloto');
             const fecharPiloto = document.getElementById('fechar-piloto');
+            
+            const btnColecao = document.getElementById('btn-colecao');
+            const galeriaContainer = document.getElementById('container-iframe-galeria');
+
+            if (btnColecao) {
+                btnColecao.addEventListener('click', () => {
+                    if (galeriaContainer) {
+                        galeriaContainer.style.display = 'block';
+                        const iframe = galeriaContainer.querySelector('iframe');
+                        if (iframe) {
+                            iframe.contentWindow.postMessage('atualizarGaleria', '*');
+                        }
+                    }
+                });
+            }
+
+            window.addEventListener('message', (event) => {
+                if (event.data === 'fecharGaleria' && galeriaContainer) {
+                    galeriaContainer.style.display = 'none';
+                }
+            });
 
             btnPiloto.addEventListener('click', () => {
                 janelaPiloto.style.display = 'flex';

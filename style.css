@@ -210,12 +210,46 @@ main {
     justify-content: center; align-items: center;
 }
 
-#imagem-grande { max-width: 90%; max-height: 90%; border: 1px solid #444; }
+#imagem-grande { 
+    max-width: 90%; max-height: 90%; 
+    border: 1px solid #444;
+    transition: transform 0.3s ease; 
+}
+
+.zoomavel {
+    cursor: zoom-in;
+}
+
+.zoomed {
+    transform: scale(2);
+    cursor: zoom-out;
+}
+
+#btn-play-dialogo {
+    display: none;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: white;
+    background: rgba(0,0,0,0.6);
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 80px; height: 80px;
+    cursor: pointer;
+    z-index: 3001;
+    transition: transform 0.2s, background 0.2s;
+}
+
+#btn-play-dialogo:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: rgba(150,0,0,0.8);
+}
 
 /* --- BOTÃO COLEÇÃO --- */
 .btn-circular {
     position: absolute; bottom: 30px; right: 30px;
-    width: 60px; height: 60px; border-radius: 50%;
+    width: 80px; height: 80px; border-radius: 50%;
     background: rgba(60, 0, 0, 0.8); color: white;
     border: 1px solid white; display: flex; justify-content: center;
     align-items: center; text-decoration: none; z-index: 100;
@@ -470,4 +504,62 @@ main {
 @keyframes descerTela {
     0% { transform: translateY(-100%); }
     100% { transform: translateY(0); }
+}
+
+/* --- RESPONSIVIDADE (MOBILE) --- */
+@media (max-width: 768px) {
+    /* Ajustes Gerais de Layout */
+    body#pagina-home, body#pagina-game {
+        height: 100%;
+        overflow-y: auto; /* Permite rolagem se necessário */
+        justify-content: center;
+    }
+
+    /* Home */
+    #pagina-home .titulo { font-size: 2.5rem; margin-bottom: 10px; }
+    #pagina-home #olho { width: 130px; }
+    .menu-inicial { flex-direction: column; gap: 20px; margin-top: 30px; }
+    
+    /* Game Container */
+    #game-container {
+        width: 100%;
+        height: 60vh; /* Altura adaptada para mobile */
+        aspect-ratio: auto; /* Remove a proporção fixa de cinema */
+        max-height: 600px;
+    }
+
+    /* Elementos do Jogo (Escala Reduzida) */
+    .titulo { font-size: 2rem; margin-top: 10px; }
+    #olho { width: 90px; }
+    #mosca { width: 60px; }
+    #mao { width: 110px; }
+    
+    .minion { height: 80px; }
+    .minion-grupo { height: 100px !important; }
+    
+    /* Botões */
+    .btn-circular { 
+        width: 60px; height: 60px; 
+        bottom: 15px; right: 15px; 
+        font-size: 0.7rem;
+    }
+    
+    .badge, .btn-experiencia {
+        width: 100%; 
+        max-width: 200px;
+        height: 50px;
+    }
+
+    /* Galeria */
+    #pagina-galeria { padding: 20px; }
+    .grid-colecao { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px; 
+    }
+    .item-galeria { height: auto; aspect-ratio: 1/1.4; }
+    
+    /* Modais e Diálogos */
+    .modal-conteudo { width: 90%; padding: 20px; }
+    #dialogo-container { width: 95%; font-size: 1rem; padding: 15px; bottom: 10px; }
+    #btn-play-dialogo { width: 60px; height: 60px; font-size: 2rem; }
 }
