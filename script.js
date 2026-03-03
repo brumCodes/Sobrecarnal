@@ -72,8 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (faseAtual === 'mosca') {
             contadorCliques++;
             if (displayContador) displayContador.innerText = `${contadorCliques} / ${metaCliques}`;
-            mosca.style.width = '80px'; 
-            setTimeout(() => { if (mosca.style.display !== 'none') mosca.style.width = '100px'; }, 200); 
+            mosca.classList.add('mosca-atingida');
+            setTimeout(() => { if (mosca.style.display !== 'none') mosca.classList.remove('mosca-atingida'); }, 200); 
             if (contadorCliques >= metaCliques) {
                 exibirRecompensa('assets/lucia-ficha.png');
                 contadorCliques = 0;
