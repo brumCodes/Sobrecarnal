@@ -28,24 +28,34 @@
             const imagemGrande = document.getElementById('imagem-grande');
             const btnVoltar = document.getElementById('btn-voltar');
             
-            const colecao = JSON.parse(localStorage.getItem('imagensDesbloqueadas')) || [];
+            function carregarGaleria() {
+                const colecao = JSON.parse(localStorage.getItem('imagensDesbloqueadas')) || [];
+                grid.innerHTML = ''; // Limpa a grade antes de recriar
 
-            if (colecao.length === 0) {
-                grid.innerHTML = "<p style='opacity:0.5; font-family: sans-serif; grid-column: 1 / -1; text-align: center; width: 100%;'>Nenhum fragmento coletado ainda. Volte e clique no olho.</p>";
-            } else {
-                colecao.forEach(caminho => {
-                    const img = document.createElement('img');
-                    img.src = caminho;
-                    img.className = 'item-galeria';
-                    
-                    img.addEventListener('click', () => {
-                        imagemGrande.src = caminho;
-                        visualizador.style.display = 'flex';
+                if (colecao.length === 0) {
+                    grid.innerHTML = "<p style='opacity:0.5; font-family: sans-serif; grid-column: 1 / -1; text-align: center; width: 100%;'>Nenhum fragmento coletado ainda. Volte e clique no olho.</p>";
+                } else {
+                    colecao.forEach(caminho => {
+                        const img = document.createElement('img');
+                        img.src = caminho;
+                        img.className = 'item-galeria';
+                        
+                        img.addEventListener('click', () => {
+                            imagemGrande.src = caminho;
+                            visualizador.style.display = 'flex';
+                        });
+
+                        grid.appendChild(img);
                     });
-
-                    grid.appendChild(img);
-                });
+                }
             }
+
+            carregarGaleria(); // Carrega ao abrir
+
+            // Ouve o aviso do jogo para atualizar a lista
+            window.addEventListener('message', (event) => {
+                if (event.data === 'atualizarGaleria') carregarGaleria();
+            });
 
             visualizador.addEventListener('click', () => {
                 visualizador.style.display = 'none';
