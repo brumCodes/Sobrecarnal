@@ -514,60 +514,60 @@ main {
 @media (max-width: 768px) {
     /* Ajustes Gerais de Layout */
     body#pagina-home, body#pagina-game, html {
-        height: 100vh;
-        overflow: hidden;
-        justify-content: center; /* Centraliza verticalmente */
+        height: 100vh !important;
+        overflow: hidden !important;
+        justify-content: center !important;
     }
 
     /* Home */
-    #pagina-home .titulo { font-size: 2.5rem; margin-bottom: 15px; }
-    #pagina-home #olho { width: 130px; }
-    .menu-inicial { flex-direction: column; gap: 15px; margin-top: 20px; }
-    .badge, .btn-experiencia { width: 140px; height: 45px; font-size: 0.8rem; }
+    #pagina-home .titulo { font-size: 2.5rem !important; margin-bottom: 15px !important; }
+    #pagina-home #olho { width: 130px !important; }
+    .menu-inicial { flex-direction: column !important; gap: 15px !important; margin-top: 20px !important; }
+    .badge, .btn-experiencia { width: 140px !important; height: 45px !important; font-size: 0.8rem !important; }
     
     /* Game Container */
     #game-container {
-        width: 100vw; /* Ocupa a largura total do celular */
-        aspect-ratio: 16 / 9; /* Mantém a proporção exata do PC */
-        height: auto;
-        max-width: none;
-        border: none;
-        box-shadow: none;
+        width: 100vw !important;
+        aspect-ratio: 16 / 9 !important;
+        height: auto !important;
+        max-width: none !important;
+        border: none !important;
+        box-shadow: none !important;
     }
 
     /* Elementos do Jogo (Escala Reduzida Proporcionalmente) */
     .titulo { 
-        font-size: 1.5rem; margin-top: 10px; 
+        font-size: 1.5rem !important; margin-top: 10px !important; 
     }
 
-    #olho { width: 60px; }
+    #olho { width: 60px !important; }
     
-    #mosca { width: 40px; }
-    .mosca-dupla { width: 40px; }
+    #mosca { width: 40px !important; }
+    .mosca-dupla { width: 40px !important; }
     
-    #mao { width: 70px; }
+    #mao { width: 70px !important; }
     
-    .minion { height: 50px; }
+    .minion { height: 50px !important; }
     .minion-grupo { height: 60px !important; }
     
     .btn-circular { 
-        width: 40px; height: 40px; 
-        bottom: 10px; right: 10px; 
-        font-size: 0.6rem;
+        width: 40px !important; height: 40px !important; 
+        bottom: 10px !important; right: 10px !important; 
+        font-size: 0.6rem !important;
     }
 
     /* Ajuste Pêndulo */
-    .pendulo-container { top: -10px; }
+    .pendulo-container { top: -10px !important; }
 
     /* Galeria */
-    #pagina-galeria { padding: 15px; }
+    #pagina-galeria { padding: 15px !important; }
     .grid-colecao { 
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 10px; 
+        grid-template-columns: repeat(3, 1fr) !important; 
+        gap: 10px !important; 
     }
     
     /* Modais e Diálogos */
-    .modal-conteudo { width: 90%; padding: 15px; }
-    #dialogo-container { width: 95%; font-size: 0.9rem; padding: 10px; bottom: 10px; }
-    #btn-play-dialogo { width: 50px; height: 50px; font-size: 1.5rem; }
+    .modal-conteudo { width: 90% !important; padding: 15px !important; }
+    #dialogo-container { width: 95% !important; font-size: 0.9rem !important; padding: 10px !important; bottom: 10px !important; }
+    #btn-play-dialogo { width: 50px !important; height: 50px !important; font-size: 1.5rem !important; }
 }
