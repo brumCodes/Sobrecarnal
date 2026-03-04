@@ -530,4 +530,33 @@ main {
     #aviso-mobile { display: flex; }
     #game-container, #contador-visual { display: none !important; }
     body { overflow: hidden; }
+
+    /* --- AJUSTES HOME MOBILE --- */
+    #pagina-home .titulo {
+        font-size: 2.5rem;
+        padding: 0 10px;
+    }
+
+    #pagina-home .menu-inicial {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #pagina-home .badge, 
+    #pagina-home .btn-experiencia {
+        width: 220px;
+        height: 60px;
+    }
+
+    #pagina-home #olho {
+        width: 130px;
+    }
+
+    #pagina-home .btn-circular {
+        width: 60px;
+        height: 60px;
+        font-size: 0.7rem;
+        bottom: 15px;
+        right: 15px;
+    }
 }
