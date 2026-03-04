@@ -564,6 +564,9 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (imgAtual.includes('recompensa9.png')) {
         iniciarFaseFinalDialogo();
     }
+    else if (imgAtual.includes('recompensa10.png')) {
+        window.location.href = 'index.html';
+    }
         });
     }
 });

@@ -526,7 +526,7 @@ main {
 #aviso-mobile p { font-family: 'Cinzel', serif; font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 
 /* Se a tela for menor que 768px (celulares e tablets pequenos) */
-@media (max-width: 768px) {
+@media (max-width: 768px), (max-height: 500px) and (orientation: landscape) {
     #aviso-mobile { display: flex; }
     #game-container, #contador-visual { display: none !important; }
     body { overflow: hidden; }
@@ -553,10 +553,6 @@ main {
     }
 
     #pagina-home .btn-circular {
-        width: 60px;
-        height: 60px;
-        font-size: 0.7rem;
-        bottom: 15px;
-        right: 15px;
+        display: none !important;
     }
 }
