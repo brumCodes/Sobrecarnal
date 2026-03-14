@@ -31,23 +31,15 @@
         <h1 class="titulo">Sobrecarnal</h1>
         
         <div class="menu-inicial">
-            <button class="badge bloqueado" id="btn-piloto">
-                <p>piloto estreia</p>
-                <p class="data">13/03</p>
-            </button>
+            <a href="piloto.html" class="badge" id="btn-piloto" style="text-decoration: none;">
+                <p>piloto</p>
+                <p class="data">Leia agora</p>
+            </a>
             
             <a href="game.html" class="btn-experiencia">Experiência</a>
         </div>
     </main>
     
-    <div id="janela-piloto" class="modal-recompensa">
-        <div class="modal-conteudo">
-            <span class="fechar-modal" id="fechar-piloto">&times;</span>
-            <h2 style="font-family: 'Cinzel'; color: #900;">Em Breve</h2>
-            <p style="color: #ccc; font-size: 1rem; margin-top: 10px; font-family: 'Cinzel', serif;">Volte no dia 13/03 para ler gratuitamente.</p>
-        </div>
-    </div>
-
     <div id="btn-colecao" class="btn-circular" style="cursor: pointer;">
         <span>Coleção</span>
     </div>
@@ -58,10 +50,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const btnPiloto = document.getElementById('btn-piloto');
-            const janelaPiloto = document.getElementById('janela-piloto');
-            const fecharPiloto = document.getElementById('fechar-piloto');
-            
             const btnColecao = document.getElementById('btn-colecao');
             const galeriaContainer = document.getElementById('container-iframe-galeria');
 
@@ -81,13 +69,6 @@
                 if (event.data === 'fecharGaleria' && galeriaContainer) {
                     galeriaContainer.style.display = 'none';
                 }
-            });
-
-            btnPiloto.addEventListener('click', () => {
-                janelaPiloto.style.display = 'flex';
-            });
-            fecharPiloto.addEventListener('click', () => {
-                janelaPiloto.style.display = 'none';
             });
         });
     </script>
